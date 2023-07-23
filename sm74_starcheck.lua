@@ -9,6 +9,7 @@ end
 
 local function sm74_layout_page_1()
     layout = {}
+    table.insert(layout,{type = "font",font = FONT_HUD})
     for i = COURSE_BOB,COURSE_RR do
         local y =  i
         table.insert(layout,{type = "text",text = format_number(i),x = 0, y = y})
@@ -187,13 +188,6 @@ local function generate_sm74_layout(pageNum)
     end
 end
 
-function on_join(m)
-    if type(_G.star_check_layouts) == "table" then
-        --change the "Your Mod Name" to the name of the romhack as stored in the main.lua --name parameter
-        --also change the function name to something that fits your mod
-        _G.star_check_layouts["Super Mario 74 (+EE)"] = generate_sm74_layout
-        _G.star_check_max_pages = #pages
-    end
+if type(_G.star_check_layouts) == "table" then
+    _G.star_check_layouts["Super Mario 74 (+EE)"] = {pages = generate_sm74_layout,page_count = #pages}
 end
-
-hook_event(HOOK_ON_PLAYER_CONNECTED,on_join)

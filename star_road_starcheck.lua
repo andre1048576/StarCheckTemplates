@@ -9,6 +9,7 @@ end
 
 local function star_road_layout_page_1()
     layout = {}
+    table.insert(layout,{type = "font",font = FONT_HUD})
     for i = COURSE_BOB,COURSE_RR do
         table.insert(layout,{type = "text",text = format_number(i),x = 0, y = i})
         for s = 0,6 do
@@ -86,6 +87,7 @@ local function star_road_layout_page_2()
 
     if (save_file_get_total_star_count(get_current_save_file_num() - 1,0,26)) >= 120 then
         table.insert(layout,{type = "text",text = "H Palace",x =  4, y = 14})
+        table.insert(layout,{type = "font",font = FONT_HUD})
         table.insert(layout,{type = "star",course = COURSE_WMOTR,star_num = 0,x =  6,y = 15})
     end
     if (save_file_get_total_star_count(get_current_save_file_num() - 1,0,26)) >= 121 then
@@ -109,11 +111,6 @@ local function generate_star_road_layout(pageNum)
 end
 
 
-function on_join()
-    if type(_G.star_check_layouts) == "table" then
-        _G.star_check_layouts["Star Road"] = generate_star_road_layout
-        _G.star_check_max_pages = #pages
-    end
+if type(_G.star_check_layouts) == "table" then
+    _G.star_check_layouts["Star Road"] = {pages = generate_star_road_layout,page_count = #pages}
 end
-
-hook_event(HOOK_ON_PLAYER_CONNECTED,on_join)
