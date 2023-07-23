@@ -110,7 +110,6 @@ local function generate_star_road_layout(pageNum)
     return pages[pageNum]()
 end
 
-
-if type(_G.star_check_layouts) == "table" then
-    _G.star_check_layouts["Star Road"] = {pages = generate_star_road_layout,page_count = #pages}
+if star_check_layouts ~= nil then
+    star_check_layouts["Star Road"] = {pages = generate_star_road_layout,page_count = #pages}
 end

@@ -188,6 +188,6 @@ local function generate_sm74_layout(pageNum)
     end
 end
 
-if type(_G.star_check_layouts) == "table" then
-    _G.star_check_layouts["Super Mario 74 (+EE)"] = {pages = generate_sm74_layout,page_count = #pages}
+if star_check_layouts ~= nil then
+    star_check_layouts["Super Mario 74 (+EE)"] = {pages = generate_sm74_layout,page_count = #pages}
 end
