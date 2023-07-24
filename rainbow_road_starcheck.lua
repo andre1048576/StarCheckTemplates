@@ -1,4 +1,6 @@
 
+local mod_name = "Super Mario Rainbow Road"
+
 local function format_number(number)
     local string = tostring(number)
     if number < 10 then
@@ -38,13 +40,21 @@ local function rainbow_road_layout_page_2()
         table.insert(layout,{type = "color",r = 255, g = 255,b = 255, a = 255})
         table.insert(layout,{type = "star",course = i,star_num = 0,x = x,y = y + 1})
     end
+    if save_file_get_flags() & (SAVE_FLAG_HAVE_KEY_1 | SAVE_FLAG_UNLOCKED_BASEMENT_DOOR) ~= 0 then
+        table.insert(layout,{type = "color",r = 0, g = 255,b = 0, a = 255})
+    end
     table.insert(layout,{type = "font",font = FONT_MENU})
     table.insert(layout,{type = "text",text = "Fiery Fortress",x = 0,y = 4})
+    table.insert(layout,{type = "color",r = 255, g = 255,b = 255, a = 255})
     table.insert(layout,{type = "text",text = "Cap Courses",x = 0,y = 1})
     y_end = 6
     if (save_file_get_total_star_count(get_current_save_file_num() - 1,0,26)) >= 54 then
         y_end = y_end + 2
+        if (save_file_get_star_flags(get_current_save_file_num() - 1, COURSE_SA - 1) > 0) then
+            table.insert(layout,{type = "color",r = 0, g = 255,b = 0, a = 255})
+        end
         table.insert(layout,{type = "text",text = "Galaxy Palace",x = 0,y = 6})
+        table.insert(layout,{type = "color",r = 255, g = 255,b = 255, a = 255})
         table.insert(layout,{type = "star",course = COURSE_BITS,star_num = 0,x = 0,y = 7})
         table.insert(layout,{type = "star",course = COURSE_PSS,star_num = 0,x = 1,y = 7})
         table.insert(layout,{type = "star",course = COURSE_BITDW,star_num = 1,x = 1,y = 5})
@@ -67,5 +77,5 @@ local function generate_rainbow_road_layout(pageNum)
 end
 
 if star_check_layouts ~= nil then
-    star_check_layouts["Super Mario Rainbow Road"] = {pages = generate_rainbow_road_layout,page_count = #pages}
+    star_check_layouts[mod_name] = {pages = generate_rainbow_road_layout,page_count = #pages}
 end

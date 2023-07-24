@@ -1,4 +1,6 @@
 
+local mod_name = "template"
+
 local function format_number(number)
     local string = tostring(number)
     if number < 10 then
@@ -30,5 +32,5 @@ local function generate_template_layout(pageNum)
 end
 
 if star_check_layouts ~= nil then
-    star_check_layouts["template"] = {pages = generate_template_layout,page_count = #pages}
+    star_check_layouts[mod_name] = {pages = generate_template_layout,page_count = #pages}
 end
