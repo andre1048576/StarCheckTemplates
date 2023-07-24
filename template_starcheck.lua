@@ -30,5 +30,5 @@ local function generate_template_layout(pageNum)
 end
 
 if star_check_layouts ~= nil then
-    star_check_layouts["Star Road"] = {pages = generate_template_layout,page_count = #pages}
+    star_check_layouts["template"] = {pages = generate_template_layout,page_count = #pages}
 end
