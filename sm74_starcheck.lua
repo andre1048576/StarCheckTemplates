@@ -190,6 +190,8 @@ local function generate_sm74_layout(pageNum)
     end
 end
 
+---@diagnostic disable-next-line: undefined-global
 if star_check_layouts ~= nil then
+    ---@diagnostic disable-next-line: undefined-global
     star_check_layouts[mod_name] = {pages = generate_sm74_layout,page_count = #pages}
 end

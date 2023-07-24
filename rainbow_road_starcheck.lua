@@ -76,6 +76,8 @@ local function generate_rainbow_road_layout(pageNum)
     return pages[pageNum]()
 end
 
+---@diagnostic disable-next-line: undefined-global
 if star_check_layouts ~= nil then
+    ---@diagnostic disable-next-line: undefined-global
     star_check_layouts[mod_name] = {pages = generate_rainbow_road_layout,page_count = #pages}
 end
