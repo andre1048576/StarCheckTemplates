@@ -1,6 +1,6 @@
 
 local mod_name = "Super Mario 74 (+EE)"
-
+local color = nil
 local function format_number(number)
     local string = tostring(number)
     if number < 10 then
@@ -46,19 +46,17 @@ local function sm74_layout_page_2()
     table.insert(layout,{type = "text",text = "Cap Stars",x = 0, y = 8})
     cap_text = {[COURSE_COTMC] = "Metal Cap",[COURSE_TOTWC] = "Wing Cap",[COURSE_VCUTM] = "Vanish Cap"}
     cap_checks = {[COURSE_COTMC] = SAVE_FLAG_HAVE_METAL_CAP,[COURSE_TOTWC] = SAVE_FLAG_HAVE_WING_CAP,[COURSE_VCUTM] = SAVE_FLAG_HAVE_VANISH_CAP}
-    cap_colors = {[COURSE_COTMC] = {type = "color", r = 0, g = 255, b = 0, a = 255},[COURSE_TOTWC] = {type = "color", r = 255, g = 0, b = 0, a = 255},[COURSE_VCUTM] = {type = "color", r = 0, g = 0, b = 255, a = 255}}
+    cap_colors = {[COURSE_COTMC] = {r = 0, b = 0},[COURSE_TOTWC] = {g = 0, b = 0},[COURSE_VCUTM] = {r = 0, g = 0}}
     cap_stars = {[COURSE_COTMC] = 4,[COURSE_TOTWC] = 2,[COURSE_VCUTM] = 5}
     for i = COURSE_COTMC,COURSE_VCUTM do
         local y = (2*i-31)
+        color = nil
         if save_file_get_flags() & cap_checks[i] ~= 0 then
-            table.insert(layout,cap_colors[i])
-        else
-            table.insert(layout,{type = "color",r = 255, g = 255,b = 255, a = 255})
+            color = cap_colors[i]
         end
         table.insert(layout,{type = "font",font = FONT_MENU})
-        table.insert(layout,{type = "text",text = cap_text[i],x = 0,y = y})
+        table.insert(layout,{type = "text",text = cap_text[i],x = 0,y = y, color = color})
         table.insert(layout,{type = "font",font = FONT_HUD})
-        table.insert(layout,{type = "color",r = 255, g = 255,b = 255, a = 255})
         for s = 0,cap_stars[i] do
             table.insert(layout,{type = "star",course = i,star_num = s,x = s,y = y + 1})
         end
@@ -74,14 +72,12 @@ local function sm74_layout_page_3()
     for i = COURSE_BITDW,COURSE_BITS do
         local y =  2 * (i - 15)
         table.insert(layout,{type = "font",font = FONT_MENU})
+        color = nil
         if key_checks[i] and save_file_get_flags() & key_checks[i] ~= 0 then
-            table.insert(layout,{type = "color",r = 0, g = 255,b = 0, a = 255})
-        else
-            table.insert(layout,{type = "color",r = 255, g = 255,b = 255, a = 255})
+            color = {r = 0,b = 0}
         end
-        table.insert(layout,{type = "text",text = "B" .. i-COURSE_BITDW+1,x =  0,y = y})
+        table.insert(layout,{type = "text",text = "B" .. i-COURSE_BITDW+1,x =  0,y = y, color = color})
         table.insert(layout,{type = "font",font = FONT_HUD})
-        table.insert(layout,{type = "color",r = 255, g = 255,b = 255, a = 255})
         for s = 0,(i-13) do
             table.insert(layout,{type = "star",course = i,star_num = s,x = s,y = y + 1})
         end
@@ -123,19 +119,17 @@ local function sm74EE_layout_page_2()
     table.insert(layout,{type = "text",text = "Cap Stars",x = 0, y = 8})
     cap_text = {[COURSE_COTMC] = "Metal Cap",[COURSE_TOTWC] = "Wing Cap",[COURSE_VCUTM] = "Vanish Cap"}
     cap_checks = {[COURSE_COTMC] = SAVE_FLAG_HAVE_METAL_CAP,[COURSE_TOTWC] = SAVE_FLAG_HAVE_WING_CAP,[COURSE_VCUTM] = SAVE_FLAG_HAVE_VANISH_CAP}
-    cap_colors = {[COURSE_COTMC] = {type = "color", r = 0, g = 255, b = 0, a = 255},[COURSE_TOTWC] = {type = "color", r = 255, g = 0, b = 0, a = 255},[COURSE_VCUTM] = {type = "color", r = 0, g = 0, b = 255, a = 255}}
+    cap_colors = {[COURSE_COTMC] = {r = 0, b = 0},[COURSE_TOTWC] = {g = 0, b = 0},[COURSE_VCUTM] = {r = 0, g = 0}}
     cap_stars = {[COURSE_COTMC] = 5,[COURSE_TOTWC] = 2,[COURSE_VCUTM] = 5}
     for i = COURSE_COTMC,COURSE_VCUTM do
         local y = (2*i-31)
+        color = nil
         if save_file_get_flags() & cap_checks[i] ~= 0 then
-            table.insert(layout,cap_colors[i])
-        else
-            table.insert(layout,{type = "color",r = 255, g = 255,b = 255, a = 255})
+            color = cap_colors[i]
         end
         table.insert(layout,{type = "font",font = FONT_MENU})
-        table.insert(layout,{type = "text",text = cap_text[i],x = 0,y = y})
+        table.insert(layout,{type = "text",text = cap_text[i],x = 0,y = y,color = color})
         table.insert(layout,{type = "font",font = FONT_HUD})
-        table.insert(layout,{type = "color",r = 255, g = 255,b = 255, a = 255})
         for s = 0,cap_stars[i] do
             table.insert(layout,{type = "star",course = i,star_num = s,x = s,y = y + 1})
         end
@@ -151,14 +145,12 @@ local function sm74EE_layout_page_3()
     for i = COURSE_BITDW,COURSE_BITS do
         local y =  2 * (i - 15)
         table.insert(layout,{type = "font",font = FONT_MENU})
+        color = nil
         if key_checks[i] and save_file_get_flags() & key_checks[i] ~= 0 then
-            table.insert(layout,{type = "color",r = 0, g = 255,b = 0, a = 255})
-        else
-            table.insert(layout,{type = "color",r = 255, g = 255,b = 255, a = 255})
+            color = {r = 0, b = 0}
         end
-        table.insert(layout,{type = "text",text = "B" .. i-COURSE_BITDW+1,x =  0,y = y})
+        table.insert(layout,{type = "text",text = "B" .. i-COURSE_BITDW+1,x =  0,y = y, color = color})
         table.insert(layout,{type = "font",font = FONT_HUD})
-        table.insert(layout,{type = "color",r = 255, g = 255,b = 255, a = 255})
         for s = 0,(i-13) do
             table.insert(layout,{type = "star",course = i,star_num = s,x = s,y = y + 1})
         end
