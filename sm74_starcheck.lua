@@ -1,6 +1,5 @@
 
 local mod_name = "Super Mario 74 (+EE)"
-local color = nil
 local function format_number(number)
     local string = tostring(number)
     if number < 10 then
@@ -81,6 +80,7 @@ local function sm74_layout_page_3()
         for s = 0,(i-13) do
             table.insert(layout,{type = "star",course = i,star_num = s,x = s,y = y + 1})
         end
+    end
         table.insert(layout,{type = "font",font = FONT_MENU})
         table.insert(layout,{type = "text",text = "Frozen Slide",x =  0,y = 9})
         table.insert(layout,{type = "font",font = FONT_HUD})
@@ -93,7 +93,6 @@ local function sm74_layout_page_3()
         table.insert(layout,{type = "font",font = FONT_HUD})
         table.insert(layout,{type = "star",course = COURSE_SA,star_num = 0,x = 0,y = 12})
         table.insert(layout,{type = "star",course = COURSE_SA,star_num = 2,x = 0,y = 14})
-    end
     return layout
 end
 
@@ -154,18 +153,18 @@ local function sm74EE_layout_page_3()
         for s = 0,(i-13) do
             table.insert(layout,{type = "star",course = i,star_num = s,x = s,y = y + 1})
         end
-        table.insert(layout,{type = "font",font = FONT_MENU})
-        table.insert(layout,{type = "text",text = "Supply Slide",x =  0,y = 9})
-        table.insert(layout,{type = "font",font = FONT_HUD})
-        for s = 0,3 do
-            table.insert(layout,{type = "star",course = COURSE_PSS,star_num = s,x = s,y = 10})
-        end
-        table.insert(layout,{type = "font",font = FONT_MENU})
-        table.insert(layout,{type = "text",text = "Triarch Bridge",x =  0,y = 12})
-        table.insert(layout,{type = "font",font = FONT_HUD})
-        for s = 0,6 do
-            table.insert(layout,{type = "star",course = COURSE_SA,star_num = s,x = s,y = 13})
-        end
+    end
+    table.insert(layout,{type = "font",font = FONT_MENU})
+    table.insert(layout,{type = "text",text = "Supply Slide",x =  0,y = 9})
+    table.insert(layout,{type = "font",font = FONT_HUD})
+    for s = 0,3 do
+        table.insert(layout,{type = "star",course = COURSE_PSS,star_num = s,x = s,y = 10})
+    end
+    table.insert(layout,{type = "font",font = FONT_MENU})
+    table.insert(layout,{type = "text",text = "Triarch Bridge",x =  0,y = 12})
+    table.insert(layout,{type = "font",font = FONT_HUD})
+    for s = 0,6 do
+        table.insert(layout,{type = "star",course = COURSE_SA,star_num = s,x = s,y = 13})
     end
     return layout
 end

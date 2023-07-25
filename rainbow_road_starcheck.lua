@@ -50,7 +50,7 @@ local function rainbow_road_layout_page_2()
         y_end = y_end + 2
         color = nil
         if (save_file_get_star_flags(get_current_save_file_num() - 1, COURSE_SA - 1) > 0) then
-            color  = {r = 0,b = 0}
+            color = {r = 0,b = 0}
         end
         table.insert(layout,{type = "text",text = "Galaxy Palace",x = 0,y = 6,color = color})
         table.insert(layout,{type = "star",course = COURSE_BITS,star_num = 0,x = 0,y = 7})

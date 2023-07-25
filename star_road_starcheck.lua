@@ -1,6 +1,6 @@
 
 local mod_name = "Star Road"
-local color = nil
+
 local function format_number(number)
     local string = tostring(number)
     if number < 10 then
@@ -27,6 +27,7 @@ local function star_road_layout_page_2()
     key_checks = {[COURSE_BITDW] = SAVE_FLAG_HAVE_KEY_1 | SAVE_FLAG_UNLOCKED_BASEMENT_DOOR, [COURSE_BITFS] = SAVE_FLAG_HAVE_KEY_2 | SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR}
     for i = COURSE_BITDW,COURSE_BITS do
         local y = 2
+        color = nil
         table.insert(layout,{type = "font",font = FONT_MENU})
         if key_checks[i] and save_file_get_flags() & key_checks[i] ~= 0 then
             color = {r = 0,b = 0}
