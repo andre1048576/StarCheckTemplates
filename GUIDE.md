@@ -17,11 +17,11 @@ Pages are the core building blocks that form a template. Each page can be displa
 
 # What are headers?
 
-Headers can be views as smaller pages displayed in the top middle of the screen. They are useful for displaying information about pages such as which overworld pages are in or data such as switches pressed. Headers should occupy vertical indices **0-4 (y = 0 to 4)**, and horizontal indices **0-9 at most (x = 0 to 9)**. Horizontal index 4.5 represents the middle of the screen, which can be helpful.
+Headers can be views as smaller pages displayed in the top middle of the screen. They are useful for displaying information about pages such as which overworld pages are in or data such as switches pressed. Headers should occupy vertical indices **0-3 (y = 0 to 3)**, and horizontal indices **0-9 at most (x = 0 to 9)**. Horizontal index 4.5 represents the middle of the screen, which can be helpful.
 
 What can I put in a page / header?
 
-There are currently 5 main values you can put into a page/header:
+There are currently 6 main values you can put into a page/header:
 
 ## type = "text"  
 parameters:  
@@ -31,8 +31,10 @@ y : number
 
 optional parameters:  
 color : rgba table  
+right_align : bool  
+center : bool  
 
-example : {type = "text",text = "Vanish Cap", x = 0, y = 3}
+example : {type = "text",text = "Vanish Cap", x = 0, y = 3,center = true}
 
 This will display text at the position (x,y) using the current font, which can be changed using type = "font" below
 
@@ -42,6 +44,10 @@ course : COURSE_INDEX
 star_num : integer  
 x : number  
 y : number  
+
+optional parameters:  
+right_align : bool  
+center : bool  
 
 example : {type = "star", course = COURSE_BOB, star_num = 5, x = 2,y = 1}
 
@@ -66,8 +72,8 @@ example : {type = "color",r = 255, g = 0,b = 127, a = 255}
 
 This will change the color used to display the upcoming items. a = 255 means it is entirely opaque, with a = 0 meaning it's completely transparent (invisible). Generally, you will want to leave 'a' blank. stars will also be colored by type = "color", so be sure to set the color to white (all 255) before displaying stars. If a value is not provided, it will default to 255, so {type = "color"} will set the color to white. This also applies for any rgba table parameters.
 
-## type = "rect"
-parameters:
+## type = "rect"  
+parameters:  
 x : number  
 y : number  
 width : number  
@@ -78,4 +84,16 @@ color : rgba table
 
 example : {type = "rect", x = 2, y = 0, width = 6, height = 15, color = {g = 0,a = 127}}
 
-this will display a rectangle at the position x and y, and with a width of width and a height of height.
+## type = "texture"  
+parameters:  
+texture : string  
+x : number  
+y : number  
+
+optional parameters:  
+scaleX : number  
+scaleY : number  
+right_align : bool  
+center : bool  
+
+this will display a texture loaded from the texture parameter at the position x and y. It can be scaled in the X and Y directions using scaleX and scaleY, which will multiply the final scale (example: texture of 24px width and 1/3 scaleX -> 24*(1/3) = 8px final width)
