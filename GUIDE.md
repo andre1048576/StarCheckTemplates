@@ -45,7 +45,7 @@ star_num : integer
 x : number  
 y : number  
 
-optional parameters:
+optional parameters:  
 right_align : bool  
 center : bool  
 
@@ -72,8 +72,8 @@ example : {type = "color",r = 255, g = 0,b = 127, a = 255}
 
 This will change the color used to display the upcoming items. a = 255 means it is entirely opaque, with a = 0 meaning it's completely transparent (invisible). Generally, you will want to leave 'a' blank. stars will also be colored by type = "color", so be sure to set the color to white (all 255) before displaying stars. If a value is not provided, it will default to 255, so {type = "color"} will set the color to white. This also applies for any rgba table parameters.
 
-## type = "rect"
-parameters:
+## type = "rect"  
+parameters:  
 x : number  
 y : number  
 width : number  
@@ -84,15 +84,15 @@ color : rgba table
 
 example : {type = "rect", x = 2, y = 0, width = 6, height = 15, color = {g = 0,a = 127}}
 
-## type = "texture"
-parameters:
-texture : string
-x : number
-y : number
+## type = "texture"  
+parameters:  
+texture : string  
+x : number  
+y : number  
 
-optional parameters:
-scaleX : number
-scaleY : number
+optional parameters:  
+scaleX : number  
+scaleY : number  
 right_align : bool  
 center : bool  
 
