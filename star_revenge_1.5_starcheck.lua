@@ -233,8 +233,8 @@ local function st1_5_layout_header_3()
     table.insert(layout,{type = "font",font = FONT_MENU})
     table.insert(layout,{type = "text",text = "OW 2",x = 1.5,y = 0})
     table.insert(layout,{type = "text",text = "<-",x = 1.5,y = 1})
-    table.insert(layout,{type = "text",text = "OW 3",x = 8.5,y = 0,right_aligned = true})
-    table.insert(layout,{type = "text",text = "->",x = 8.5,y = 1,right_aligned = true})
+    table.insert(layout,{type = "text",text = "OW 3",x = 8.5,y = 0,right_align = true})
+    table.insert(layout,{type = "text",text = "->",x = 8.5,y = 1,right_align = true})
     return layout
 end
 
