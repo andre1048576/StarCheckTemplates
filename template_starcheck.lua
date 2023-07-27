@@ -32,7 +32,7 @@ local function generate_template_layout(pageNum)
 end
 
 ---@diagnostic disable-next-line: undefined-global
-if star_check_layouts ~= nil then
+if star_check_layouts ~= nil and mod_name ~= "template" then
     ---@diagnostic disable-next-line: undefined-global
     star_check_layouts[mod_name] = {pages = generate_template_layout,page_count = #pages}
 end
