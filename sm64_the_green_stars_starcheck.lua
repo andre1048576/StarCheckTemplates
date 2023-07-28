@@ -30,12 +30,15 @@ local function template_layout_page_2()
     bowser_stars = {[COURSE_BITDW] = 2, [COURSE_BITFS] = 3,[COURSE_BITS] = 3}
     for i = COURSE_BITDW,COURSE_BITS do
         local y = 2 + (i-COURSE_BITDW)*3
-        color = nil
         table.insert(layout,{type = "font",font = FONT_MENU})
-        if key_checks[i] and save_file_get_flags() & key_checks[i] ~= 0 then
-            color = {r = 0,b = 0}
+        if key_checks[i] then
+            icon = "key_uncollected"
+            if save_file_get_flags() & key_checks[i] ~= 0 then
+                icon = "key_collected"
+            end
+            table.insert(layout,{type = "texture",texture = icon,x = 2,y = y})
         end
-        table.insert(layout,{type = "text",text = "B" .. i-COURSE_BITDW+1,x =  0,y = y,color = color})
+        table.insert(layout,{type = "text",text = "B" .. i-COURSE_BITDW+1,x =  0,y = y})
         table.insert(layout,{type = "font",font = FONT_HUD})
         for s = 0,bowser_stars[i] do
             table.insert(layout,{type = "star",course = i,star_num = s,x =  s,y = y + 1})
@@ -44,23 +47,24 @@ local function template_layout_page_2()
     
     cap_text = {[COURSE_COTMC] = "MC",[COURSE_TOTWC] = "WC"}
     cap_checks = {[COURSE_COTMC] = SAVE_FLAG_HAVE_METAL_CAP,[COURSE_TOTWC] = SAVE_FLAG_HAVE_WING_CAP}
-    cap_colors = {[COURSE_COTMC] = {r = 0, b = 0},[COURSE_TOTWC] = {g = 0, b = 0}}
+    cap_colors = {[COURSE_COTMC] = "green",[COURSE_TOTWC] = "red"}
     cap_stars = {[COURSE_COTMC] = 2,[COURSE_TOTWC] = 1}
     for i = COURSE_COTMC, COURSE_TOTWC do
         local y = 2 + 3*(i-COURSE_COTMC)
-        color = nil
+        icon = cap_colors[i] .. "_switch_unpressed"
         if save_file_get_flags() & cap_checks[i] ~= 0 then
-            color = cap_colors[i]
+            icon = cap_colors[i] .. "_switch_pressed"
         end
+        table.insert(layout,{type = "texture",texture = icon,x = 5,y = y})
         table.insert(layout,{type = "font",font = FONT_MENU})
-        table.insert(layout,{type = "text",text = cap_text[i],x = 6,y = y, color = color})
+        table.insert(layout,{type = "text",text = cap_text[i],x = 8,y = y, right_align = true})
         table.insert(layout,{type = "font",font = FONT_HUD})
         for s = 0,cap_stars[i] do
             table.insert(layout,{type = "star",course = i,star_num = s,x = 7 - cap_stars[i] + s,y = y + 1})
         end
     end
     table.insert(layout,{type = "font",font = FONT_MENU})
-    table.insert(layout,{type = "text",text = "Toads",x = 5,y = 8})
+    table.insert(layout,{type = "text",text = "Toads",x = 8,y = 8,right_align = true})
     table.insert(layout,{type = "font",font = FONT_HUD})
     for s = 0,2 do
         table.insert(layout,{type = "star",course = COURSE_NONE,star_num = s,x = 5 + s,y = 9})
