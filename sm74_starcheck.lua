@@ -10,10 +10,11 @@ end
 
 local function sm74_layout_page_1()
     layout = {}
-    table.insert(layout,{type = "font",font = FONT_HUD})
     for i = COURSE_BOB,COURSE_RR do
         local y =  i
+        table.insert(layout,{type = "font",font = FONT_MENU})
         table.insert(layout,{type = "text",text = format_number(i),x = 0, y = y})
+        table.insert(layout,{type = "font",font = FONT_HUD})
         for s = 0,6 do
             local x = (s+2)
             table.insert(layout,{type = "star",course = i,star_num = s,x = x,y = y})
@@ -26,152 +27,154 @@ end
 local function sm74_layout_page_2()
     local layout = {}
     table.insert(layout,{type = "font",font = FONT_MENU})
-    table.insert(layout,{type = "text",text = "Valley of Toads",x = 0, y = 2})
-    table.insert(layout,{type = "text",text = "Overworld Stars",x = 0, y = 1})
+    table.insert(layout,{type = "text",text = "OW1",x = 0, y = 1})
+    table.insert(layout,{type = "text",text = "OW2",x = 0, y = 2})
+    table.insert(layout,{type = "text",text = "OW3",x = 0, y = 3})
+    table.insert(layout,{type = "text",text = "MC",x = 0, y = 5})
+    table.insert(layout,{type = "text",text = "WC",x = 0, y = 6})
+    table.insert(layout,{type = "text",text = "VC",x = 0, y = 7})
+    table.insert(layout,{type = "text",text = "B1",x = 0, y = 9})
+    table.insert(layout,{type = "text",text = "B2",x = 0, y = 10})
+    table.insert(layout,{type = "text",text = "B3",x = 0, y = 11})
+    table.insert(layout,{type = "text",text = "Frozen Slide",x = 0, y = 12})
+    table.insert(layout,{type = "text",text = "Champ C.",x = 0, y = 14})
+    table.insert(layout,{type = "text",text = "151st",x = 9, y = 14,right_align = true})
+
     table.insert(layout,{type = "font",font = FONT_HUD})
-    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 0,x = 0,y = 3})
-    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 1,x = 1,y = 3 })
-    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 3,x = 2,y = 3 })
-    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 4,x = 3,y = 3 })
-    table.insert(layout,{type = "font",font = FONT_MENU})
-    table.insert(layout,{type = "text",text = "Tower of East",x = 0, y = 4})
-    table.insert(layout,{type = "font",font = FONT_HUD})
+    --OW1
+    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 0,x = 3,y = 1})
+    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 1,x = 4,y = 1})
+    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 3,x = 5,y = 1})
+    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 4,x = 6,y = 1})
+
+    --OW2
     for s = 0,5 do
-        table.insert(layout,{type = "star",course = COURSE_WMOTR,star_num = s,x = s,y = 5 })
+        table.insert(layout,{type = "star",course = COURSE_WMOTR,star_num = s,x = s+3,y = 2})
     end
-    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 2,x = 0,y = 7 })
-    table.insert(layout,{type = "font",font = FONT_MENU})
-    table.insert(layout,{type = "text",text = "Magma Temple",x = 0, y = 6})
-    table.insert(layout,{type = "text",text = "Cap Stars",x = 0, y = 8})
-    cap_text = {[COURSE_COTMC] = "Metal Cap",[COURSE_TOTWC] = "Wing Cap",[COURSE_VCUTM] = "Vanish Cap"}
+
+    --OW3
+    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 2,x = 3,y = 3})
+    
+    --CAPS
     cap_checks = {[COURSE_COTMC] = SAVE_FLAG_HAVE_METAL_CAP,[COURSE_TOTWC] = SAVE_FLAG_HAVE_WING_CAP,[COURSE_VCUTM] = SAVE_FLAG_HAVE_VANISH_CAP}
-    cap_colors = {[COURSE_COTMC] = {r = 0, b = 0},[COURSE_TOTWC] = {g = 0, b = 0},[COURSE_VCUTM] = {r = 0, g = 0}}
+    cap_colors = {[COURSE_COTMC] = "green",[COURSE_TOTWC] = "red",[COURSE_VCUTM] = "blue"}
     cap_stars = {[COURSE_COTMC] = 4,[COURSE_TOTWC] = 2,[COURSE_VCUTM] = 5}
     for i = COURSE_COTMC,COURSE_VCUTM do
-        local y = (2*i-31)
-        color = nil
-        if save_file_get_flags() & cap_checks[i] ~= 0 then
-            color = cap_colors[i]
-        end
-        table.insert(layout,{type = "font",font = FONT_MENU})
-        table.insert(layout,{type = "text",text = cap_text[i],x = 0,y = y, color = color})
+        local y = i-15
         table.insert(layout,{type = "font",font = FONT_HUD})
         for s = 0,cap_stars[i] do
-            table.insert(layout,{type = "star",course = i,star_num = s,x = s,y = y + 1})
+            table.insert(layout,{type = "star",course = i,star_num = s,x = s+2,y = y})
         end
+        icon = cap_colors[i] .. "_switch_unpressed"
+        if save_file_get_flags() & cap_checks[i] ~= 0 then
+            icon = cap_colors[i] .. "_switch_pressed"
+        end
+        table.insert(layout,{type = "texture",texture = icon,x = cap_stars[i]+3,y = y})
     end
-    return layout
-end
 
-local function sm74_layout_page_3()
-    local layout = {}
-    table.insert(layout,{type = "font",font = FONT_MENU})
-    table.insert(layout,{type = "text",text = "Bowser Courses",x = 0, y = 1})
+    --BOWSER
     key_checks = {[COURSE_BITDW] = SAVE_FLAG_HAVE_KEY_1 | SAVE_FLAG_UNLOCKED_BASEMENT_DOOR, [COURSE_BITFS] = SAVE_FLAG_HAVE_KEY_2 | SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR}
     for i = COURSE_BITDW,COURSE_BITS do
-        local y =  2 * (i - 15)
-        table.insert(layout,{type = "font",font = FONT_MENU})
-        color = nil
-        if key_checks[i] and save_file_get_flags() & key_checks[i] ~= 0 then
-            color = {r = 0,b = 0}
+        local y =  i - 7
+        if key_checks[i] then
+            icon = "key_uncollected"
+            if save_file_get_flags() & key_checks[i] ~= 0 then
+                icon = "key_collected"
+            end
+            table.insert(layout,{type = "texture",texture = icon,x = i-10,y = y})
         end
-        table.insert(layout,{type = "text",text = "B" .. i-COURSE_BITDW+1,x =  0,y = y, color = color})
-        table.insert(layout,{type = "font",font = FONT_HUD})
         for s = 0,(i-13) do
-            table.insert(layout,{type = "star",course = i,star_num = s,x = s,y = y + 1})
+            table.insert(layout,{type = "star",course = i,star_num = s,x = s+2,y = y})
         end
     end
-        table.insert(layout,{type = "font",font = FONT_MENU})
-        table.insert(layout,{type = "text",text = "Frozen Slide",x =  0,y = 9})
-        table.insert(layout,{type = "font",font = FONT_HUD})
-        for s = 0,3 do
-            table.insert(layout,{type = "star",course = COURSE_PSS,star_num = s,x = s,y = 10})
-        end
-        table.insert(layout,{type = "font",font = FONT_MENU})
-        table.insert(layout,{type = "text",text = "Champ Challenge",x =  0,y = 11})
-        table.insert(layout,{type = "text",text = "151st Star",x =  0,y = 13})
-        table.insert(layout,{type = "font",font = FONT_HUD})
-        table.insert(layout,{type = "star",course = COURSE_SA,star_num = 0,x = 0,y = 12})
-        table.insert(layout,{type = "star",course = COURSE_SA,star_num = 2,x = 0,y = 14})
+
+    for s = 0,3 do
+        table.insert(layout,{type = "star",course = COURSE_PSS,star_num = s,x = s,y = 13})
+    end
+
+    table.insert(layout,{type = "star",course = COURSE_SA,star_num = 0,x = 0,y = 15})
+    table.insert(layout,{type = "star",course = COURSE_SA,star_num = 2,x = 9,y = 15,right_align = true})
     return layout
 end
 
 local function sm74EE_layout_page_2()
     local layout = {}
     table.insert(layout,{type = "font",font = FONT_MENU})
-    table.insert(layout,{type = "text",text = "Overworld Stars",x = 0, y = 1})
-    table.insert(layout,{type = "text",text = "Fiery Valley",x = 0, y = 2})
+    table.insert(layout,{type = "text",text = "OW1",x = 0, y = 1})
+    table.insert(layout,{type = "text",text = "OW2",x = 0, y = 2})
+    table.insert(layout,{type = "text",text = "OW3",x = 0, y = 3})
+    table.insert(layout,{type = "text",text = "MC",x = 0, y = 5})
+    table.insert(layout,{type = "text",text = "WC",x = 0, y = 6})
+    table.insert(layout,{type = "text",text = "VC",x = 0, y = 7})
+    table.insert(layout,{type = "text",text = "B1",x = 0, y = 9})
+    table.insert(layout,{type = "text",text = "B2",x = 0, y = 10})
+    table.insert(layout,{type = "text",text = "B3",x = 0, y = 11})
+    table.insert(layout,{type = "text",text = "Supply Slide",x = 0, y = 12})
+    table.insert(layout,{type = "text",text = "Triarch Bridge",x = 0, y = 14})
+
     table.insert(layout,{type = "font",font = FONT_HUD})
-    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 0,x = 0,y = 3})
-    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 3,x = 1,y = 3 })
-    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 4,x = 2,y = 3 })
-    table.insert(layout,{type = "font",font = FONT_MENU})
-    table.insert(layout,{type = "text",text = "Lake of Lords",x = 0, y = 4})
-    table.insert(layout,{type = "font",font = FONT_HUD})
+    --OW1
+    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 0,x = 3,y = 1})
+    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 3,x = 4,y = 1 })
+    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 4,x = 5,y = 1 })
+
+    --OW2
     for s = 0,5 do
-        table.insert(layout,{type = "star",course = COURSE_WMOTR,star_num = s,x = s,y = 5 })
+        table.insert(layout,{type = "star",course = COURSE_WMOTR,star_num = s,x = s+3,y = 2 })
     end
-    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 1,x = 0,y = 7 })
-    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 2,x = 1,y = 7 })
-    table.insert(layout,{type = "font",font = FONT_MENU})
-    table.insert(layout,{type = "text",text = "Shadow Temple",x = 0, y = 6})
-    table.insert(layout,{type = "text",text = "Cap Stars",x = 0, y = 8})
-    cap_text = {[COURSE_COTMC] = "Metal Cap",[COURSE_TOTWC] = "Wing Cap",[COURSE_VCUTM] = "Vanish Cap"}
+
+    --OW3
+    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 1,x = 3,y = 3 })
+    table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 2,x = 4,y = 3 })
+
+    --CAPS
     cap_checks = {[COURSE_COTMC] = SAVE_FLAG_HAVE_METAL_CAP,[COURSE_TOTWC] = SAVE_FLAG_HAVE_WING_CAP,[COURSE_VCUTM] = SAVE_FLAG_HAVE_VANISH_CAP}
-    cap_colors = {[COURSE_COTMC] = {r = 0, b = 0},[COURSE_TOTWC] = {g = 0, b = 0},[COURSE_VCUTM] = {r = 0, g = 0}}
+    cap_colors = {[COURSE_COTMC] = "green",[COURSE_TOTWC] = "red",[COURSE_VCUTM] = "blue"}
     cap_stars = {[COURSE_COTMC] = 5,[COURSE_TOTWC] = 2,[COURSE_VCUTM] = 5}
     for i = COURSE_COTMC,COURSE_VCUTM do
-        local y = (2*i-31)
-        color = nil
-        if save_file_get_flags() & cap_checks[i] ~= 0 then
-            color = cap_colors[i]
-        end
-        table.insert(layout,{type = "font",font = FONT_MENU})
-        table.insert(layout,{type = "text",text = cap_text[i],x = 0,y = y,color = color})
+        local y = i-15
         table.insert(layout,{type = "font",font = FONT_HUD})
         for s = 0,cap_stars[i] do
-            table.insert(layout,{type = "star",course = i,star_num = s,x = s,y = y + 1})
+            table.insert(layout,{type = "star",course = i,star_num = s,x = s+2,y = y})
         end
+        icon = cap_colors[i] .. "_switch_unpressed"
+        if save_file_get_flags() & cap_checks[i] ~= 0 then
+            icon = cap_colors[i] .. "_switch_pressed"
+        end
+        table.insert(layout,{type = "texture",texture = icon,x = cap_stars[i]+3,y = y})
     end
-    return layout
-end
 
-local function sm74EE_layout_page_3()
-    local layout = {}
-    table.insert(layout,{type = "font",font = FONT_MENU})
-    table.insert(layout,{type = "text",text = "Bowser Courses",x = 0, y = 1})
+    --BOWSER
     key_checks = {[COURSE_BITDW] = SAVE_FLAG_HAVE_KEY_1 | SAVE_FLAG_UNLOCKED_BASEMENT_DOOR, [COURSE_BITFS] = SAVE_FLAG_HAVE_KEY_2 | SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR}
     for i = COURSE_BITDW,COURSE_BITS do
-        local y =  2 * (i - 15)
-        table.insert(layout,{type = "font",font = FONT_MENU})
-        color = nil
-        if key_checks[i] and save_file_get_flags() & key_checks[i] ~= 0 then
-            color = {r = 0, b = 0}
+        local y =  i - 7
+        if key_checks[i] then
+            icon = "key_uncollected"
+            if save_file_get_flags() & key_checks[i] ~= 0 then
+                icon = "key_collected"
+            end
+            table.insert(layout,{type = "texture",texture = icon,x = i-10,y = y})
         end
-        table.insert(layout,{type = "text",text = "B" .. i-COURSE_BITDW+1,x =  0,y = y, color = color})
-        table.insert(layout,{type = "font",font = FONT_HUD})
         for s = 0,(i-13) do
-            table.insert(layout,{type = "star",course = i,star_num = s,x = s,y = y + 1})
+            table.insert(layout,{type = "star",course = i,star_num = s,x = s+2,y = y})
         end
     end
-    table.insert(layout,{type = "font",font = FONT_MENU})
-    table.insert(layout,{type = "text",text = "Supply Slide",x =  0,y = 9})
-    table.insert(layout,{type = "font",font = FONT_HUD})
+
+    --SUPPLY SLIDE
     for s = 0,3 do
-        table.insert(layout,{type = "star",course = COURSE_PSS,star_num = s,x = s,y = 10})
+        table.insert(layout,{type = "star",course = COURSE_PSS,star_num = s,x = s,y = 13})
     end
-    table.insert(layout,{type = "font",font = FONT_MENU})
-    table.insert(layout,{type = "text",text = "Triarch Bridge",x =  0,y = 12})
-    table.insert(layout,{type = "font",font = FONT_HUD})
+
+    --TRIARCH BRIDGE
     for s = 0,6 do
-        table.insert(layout,{type = "star",course = COURSE_SA,star_num = s,x = s,y = 13})
+        table.insert(layout,{type = "star",course = COURSE_SA,star_num = s,x = s,y = 15})
     end
     return layout
 end
 
 
-local pages = {sm74_layout_page_1,sm74_layout_page_2,sm74_layout_page_3}
-local pagesEE = {sm74_layout_page_1,sm74EE_layout_page_2,sm74EE_layout_page_3}
+local pages = {sm74_layout_page_1,sm74_layout_page_2}
+local pagesEE = {sm74_layout_page_1,sm74EE_layout_page_2}
 
 local function generate_sm74_layout(pageNum)
     if gNetworkPlayers[0].currAreaIndex ~= 1 then
