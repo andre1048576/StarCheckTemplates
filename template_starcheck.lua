@@ -11,9 +11,10 @@ end
 
 local function template_layout_page_1()
     layout = {}
-    table.insert(layout,{type = "font",font = FONT_HUD})
     for i = COURSE_BOB,COURSE_RR do
+        table.insert(layout,{type = "font",font = FONT_MENU})
         table.insert(layout,{type = "text",text = format_number(i),x = 0, y = i})
+        table.insert(layout,{type = "font",font = FONT_HUD})
         for s = 0,6 do
             table.insert(layout,{type = "star",course = i,star_num = s,x = s+2,y = i})
         end
