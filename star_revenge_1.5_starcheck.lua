@@ -48,7 +48,7 @@ local function sr1_5_layout_page_2()
     table.insert(layout,{type = "text",text = "Weegee",x = 0, y = 13})
     table.insert(layout,{type = "text",text = "1-1",x = 9, y = 13,right_align = true})
     table.insert(layout,{type = "text",text = "PP",x = 9, y = 15,right_align = true})
-    table.insert(layout,{type = "text",text = "TOTSS",x = 0, y = 15})
+    table.insert(layout,{type = "text",text = "TotSS",x = 0, y = 15})
 
     table.insert(layout,{type = "font",font = FONT_HUD})
 
