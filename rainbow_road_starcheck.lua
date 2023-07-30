@@ -24,17 +24,12 @@ end
 local function rainbow_road_layout_page_2()
     layout = {}
     cap_text = {[COURSE_COTMC] = "MC",[COURSE_TOTWC] = "WC",[COURSE_VCUTM] = "VC"}
-    cap_checks = {[COURSE_COTMC] = SAVE_FLAG_HAVE_METAL_CAP,[COURSE_TOTWC] = SAVE_FLAG_HAVE_WING_CAP,[COURSE_VCUTM] = SAVE_FLAG_HAVE_VANISH_CAP}
-    switch_names = {[COURSE_COTMC] = "green_",[COURSE_TOTWC] = "red_",[COURSE_VCUTM] = "blue_"}
+    switch_names = {[COURSE_COTMC] = "green",[COURSE_TOTWC] = "red",[COURSE_VCUTM] = "blue"}
     
     for i = COURSE_COTMC, COURSE_VCUTM do
         local y = 2
         local x =  3*(i-COURSE_COTMC)
-        icon = switch_names[i] .. "switch_unpressed"
-        if save_file_get_flags() & cap_checks[i] ~= 0 then
-            icon = switch_names[i] .. "switch_pressed"
-        end
-        table.insert(layout,{type = "texture",texture = icon,x = x+2,y = y})
+        table.insert(layout,{type = "cap_switch",switch_color = switch_names[i],x = x+2,y = y})
         table.insert(layout,{type = "font",font = FONT_MENU})
         table.insert(layout,{type = "text",text = cap_text[i],x = x,y = y})
         table.insert(layout,{type = "font",font = FONT_HUD})
@@ -57,11 +52,7 @@ local function rainbow_road_layout_page_2()
         table.insert(layout,{type = "star",course = COURSE_TOTWC,star_num = 1,x = 4,y = 3})
         table.insert(layout,{type = "star",course = COURSE_VCUTM,star_num = 1,x = 7,y = 3})
     end
-    icon = "key_uncollected"
-    if save_file_get_flags() & (SAVE_FLAG_HAVE_KEY_1 | SAVE_FLAG_UNLOCKED_BASEMENT_DOOR) ~= 0 then
-        icon = "key_collected"
-    end
-    table.insert(layout,{type = "texture",texture = icon,x = x_key,y = 5})
+    table.insert(layout,{type = "key",key_num = 1,x=x_key,y=5})
     table.insert(layout,{type = "font",font = FONT_MENU})
     table.insert(layout,{type = "text",text = "End",x = 0,y = y_end})
     table.insert(layout,{type = "font",font = FONT_HUD})

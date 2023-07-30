@@ -25,41 +25,31 @@ end
 local function star_road_layout_page_2()
     
     layout = {}
-    key_checks = {[COURSE_BITDW] = SAVE_FLAG_HAVE_KEY_1 | SAVE_FLAG_UNLOCKED_BASEMENT_DOOR, [COURSE_BITFS] = SAVE_FLAG_HAVE_KEY_2 | SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR}
     for i = COURSE_BITDW,COURSE_BITS do
         local y = 2
-        icon = "key_uncollected"
         table.insert(layout,{type = "font",font = FONT_MENU})
-        if key_checks[i] and save_file_get_flags() & key_checks[i] ~= 0 then
-            icon = "key_collected"
-        end
-        if key_checks[i] then
+        if i < COURSE_BITS then
             xUsed = 1
             if (save_file_get_total_star_count(get_current_save_file_num() - 1,0,26)) >= 121 then
                 xUsed = 2
             end
-            table.insert(layout,{type = "texture",texture = icon,x = 3*(i-COURSE_BITDW)+xUsed,y = 3})
+            table.insert(layout,{type = "key",key_num = i-COURSE_BITDW+1,x=3*(i-COURSE_BITDW)+xUsed,y=3})
         end
         table.insert(layout,{type = "text",text = "B" .. i-COURSE_BITDW+1,x =  3*(i-COURSE_BITDW),y = y})
         table.insert(layout,{type = "font",font = FONT_HUD})
         table.insert(layout,{type = "star",course = i,star_num = 0,x =  3*(i-COURSE_BITDW),y = y + 1})
     end
     cap_text = {[COURSE_COTMC] = "MC",[COURSE_TOTWC] = "WC",[COURSE_VCUTM] = "VC"}
-    cap_checks = {[COURSE_COTMC] = SAVE_FLAG_HAVE_METAL_CAP,[COURSE_TOTWC] = SAVE_FLAG_HAVE_WING_CAP,[COURSE_VCUTM] = SAVE_FLAG_HAVE_VANISH_CAP}
     cap_colors = {[COURSE_COTMC] = {r = 0, b = 0},[COURSE_TOTWC] = {g = 0, b = 0},[COURSE_VCUTM] = {r = 0, g = 0}}
-    switch_names = {[COURSE_COTMC] = "green_",[COURSE_TOTWC] = "red_",[COURSE_VCUTM] = "blue_"}
+    switch_names = {[COURSE_COTMC] = "green",[COURSE_TOTWC] = "red",[COURSE_VCUTM] = "blue"}
     for i = COURSE_COTMC, COURSE_VCUTM do
         local y = 5
         local x =  3*(i-COURSE_COTMC)
-        icon = switch_names[i] .. "switch_unpressed"
-        if save_file_get_flags() & cap_checks[i] ~= 0 then
-            icon = switch_names[i] .. "switch_pressed"
-        end
         xUsed = 1
         if (save_file_get_total_star_count(get_current_save_file_num() - 1,0,26)) >= 121 then
             xUsed = 2
         end
-        table.insert(layout,{type = "texture",texture = icon,x = x+xUsed,y = y+1})
+        table.insert(layout,{type = "cap_switch",switch_color = switch_names[i],x = x+xUsed,y = y+1})
         table.insert(layout,{type = "font",font = FONT_MENU})
         table.insert(layout,{type = "text",text = cap_text[i],x = x,y = y})
         table.insert(layout,{type = "font",font = FONT_HUD})

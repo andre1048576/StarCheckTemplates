@@ -56,7 +56,6 @@ local function sm74_layout_page_2()
     table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 2,x = 3,y = 3})
     
     --CAPS
-    cap_checks = {[COURSE_COTMC] = SAVE_FLAG_HAVE_METAL_CAP,[COURSE_TOTWC] = SAVE_FLAG_HAVE_WING_CAP,[COURSE_VCUTM] = SAVE_FLAG_HAVE_VANISH_CAP}
     cap_colors = {[COURSE_COTMC] = "green",[COURSE_TOTWC] = "red",[COURSE_VCUTM] = "blue"}
     cap_stars = {[COURSE_COTMC] = 4,[COURSE_TOTWC] = 2,[COURSE_VCUTM] = 5}
     for i = COURSE_COTMC,COURSE_VCUTM do
@@ -65,23 +64,14 @@ local function sm74_layout_page_2()
         for s = 0,cap_stars[i] do
             table.insert(layout,{type = "star",course = i,star_num = s,x = s+2,y = y})
         end
-        icon = cap_colors[i] .. "_switch_unpressed"
-        if save_file_get_flags() & cap_checks[i] ~= 0 then
-            icon = cap_colors[i] .. "_switch_pressed"
-        end
-        table.insert(layout,{type = "texture",texture = icon,x = cap_stars[i]+3,y = y})
+        table.insert(layout,{type = "cap_switch",switch_color = cap_colors[i],x = cap_stars[i]+3,y = y})
     end
 
     --BOWSER
-    key_checks = {[COURSE_BITDW] = SAVE_FLAG_HAVE_KEY_1 | SAVE_FLAG_UNLOCKED_BASEMENT_DOOR, [COURSE_BITFS] = SAVE_FLAG_HAVE_KEY_2 | SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR}
     for i = COURSE_BITDW,COURSE_BITS do
         local y =  i - 7
-        if key_checks[i] then
-            icon = "key_uncollected"
-            if save_file_get_flags() & key_checks[i] ~= 0 then
-                icon = "key_collected"
-            end
-            table.insert(layout,{type = "texture",texture = icon,x = i-10,y = y})
+        if i < COURSE_BITS then
+            table.insert(layout,{type = "key",key_num = i - COURSE_BITDW+1,x= i-10,y=y})
         end
         for s = 0,(i-13) do
             table.insert(layout,{type = "star",course = i,star_num = s,x = s+2,y = y})
@@ -128,7 +118,6 @@ local function sm74EE_layout_page_2()
     table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 2,x = 4,y = 3 })
 
     --CAPS
-    cap_checks = {[COURSE_COTMC] = SAVE_FLAG_HAVE_METAL_CAP,[COURSE_TOTWC] = SAVE_FLAG_HAVE_WING_CAP,[COURSE_VCUTM] = SAVE_FLAG_HAVE_VANISH_CAP}
     cap_colors = {[COURSE_COTMC] = "green",[COURSE_TOTWC] = "red",[COURSE_VCUTM] = "blue"}
     cap_stars = {[COURSE_COTMC] = 5,[COURSE_TOTWC] = 2,[COURSE_VCUTM] = 5}
     for i = COURSE_COTMC,COURSE_VCUTM do
@@ -137,23 +126,14 @@ local function sm74EE_layout_page_2()
         for s = 0,cap_stars[i] do
             table.insert(layout,{type = "star",course = i,star_num = s,x = s+2,y = y})
         end
-        icon = cap_colors[i] .. "_switch_unpressed"
-        if save_file_get_flags() & cap_checks[i] ~= 0 then
-            icon = cap_colors[i] .. "_switch_pressed"
-        end
-        table.insert(layout,{type = "texture",texture = icon,x = cap_stars[i]+3,y = y})
+        table.insert(layout,{type = "cap_switch",switch_color = cap_colors[i],x = cap_stars[i]+3,y = y})
     end
 
     --BOWSER
-    key_checks = {[COURSE_BITDW] = SAVE_FLAG_HAVE_KEY_1 | SAVE_FLAG_UNLOCKED_BASEMENT_DOOR, [COURSE_BITFS] = SAVE_FLAG_HAVE_KEY_2 | SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR}
     for i = COURSE_BITDW,COURSE_BITS do
         local y =  i - 7
-        if key_checks[i] then
-            icon = "key_uncollected"
-            if save_file_get_flags() & key_checks[i] ~= 0 then
-                icon = "key_collected"
-            end
-            table.insert(layout,{type = "texture",texture = icon,x = i-10,y = y})
+        if i < COURSE_BITS then
+            table.insert(layout,{type = "key",key_num = i - COURSE_BITDW+1,x= i-10,y=y})
         end
         for s = 0,(i-13) do
             table.insert(layout,{type = "star",course = i,star_num = s,x = s+2,y = y})

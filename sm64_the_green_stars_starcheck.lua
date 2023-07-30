@@ -26,17 +26,12 @@ local function template_layout_page_2()
     table.insert(layout,{type = "font",font = FONT_MENU})
     table.insert(layout,{type = "text",text = "Bowser",x =  0,y = 1})
     table.insert(layout,{type = "text",text = "Caps",x =  5,y = 1})
-    key_checks = {[COURSE_BITDW] = SAVE_FLAG_HAVE_KEY_1 | SAVE_FLAG_UNLOCKED_BASEMENT_DOOR, [COURSE_BITFS] = SAVE_FLAG_HAVE_KEY_2 | SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR}
     bowser_stars = {[COURSE_BITDW] = 2, [COURSE_BITFS] = 3,[COURSE_BITS] = 3}
     for i = COURSE_BITDW,COURSE_BITS do
         local y = 2 + (i-COURSE_BITDW)*3
         table.insert(layout,{type = "font",font = FONT_MENU})
-        if key_checks[i] then
-            icon = "key_uncollected"
-            if save_file_get_flags() & key_checks[i] ~= 0 then
-                icon = "key_collected"
-            end
-            table.insert(layout,{type = "texture",texture = icon,x = 2,y = y})
+        if i < COURSE_BITS then
+            table.insert(layout,{type = "key",key_num = i - COURSE_BITDW + 1,x=2,y=y})
         end
         table.insert(layout,{type = "text",text = "B" .. i-COURSE_BITDW+1,x =  0,y = y})
         table.insert(layout,{type = "font",font = FONT_HUD})
@@ -46,16 +41,11 @@ local function template_layout_page_2()
     end
     
     cap_text = {[COURSE_COTMC] = "MC",[COURSE_TOTWC] = "WC"}
-    cap_checks = {[COURSE_COTMC] = SAVE_FLAG_HAVE_METAL_CAP,[COURSE_TOTWC] = SAVE_FLAG_HAVE_WING_CAP}
     cap_colors = {[COURSE_COTMC] = "green",[COURSE_TOTWC] = "red"}
     cap_stars = {[COURSE_COTMC] = 2,[COURSE_TOTWC] = 1}
     for i = COURSE_COTMC, COURSE_TOTWC do
         local y = 2 + 3*(i-COURSE_COTMC)
-        icon = cap_colors[i] .. "_switch_unpressed"
-        if save_file_get_flags() & cap_checks[i] ~= 0 then
-            icon = cap_colors[i] .. "_switch_pressed"
-        end
-        table.insert(layout,{type = "texture",texture = icon,x = 5,y = y})
+        table.insert(layout,{type = "cap_switch",switch_color = cap_colors[i],x = 5,y = y})
         table.insert(layout,{type = "font",font = FONT_MENU})
         table.insert(layout,{type = "text",text = cap_text[i],x = 8,y = y, right_align = true})
         table.insert(layout,{type = "font",font = FONT_HUD})
