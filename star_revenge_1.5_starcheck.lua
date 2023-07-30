@@ -62,19 +62,11 @@ local function sr1_5_layout_page_2()
 
     --bowser 1
     table.insert(layout,{type = "star",course = COURSE_BITFS,star_num = 0,x = 2,y = 6})
-    icon = "key_uncollected"
-    if save_file_get_flags() & (SAVE_FLAG_HAVE_KEY_1 | SAVE_FLAG_UNLOCKED_BASEMENT_DOOR) ~= 0 then
-        icon = "key_collected"
-    end
-    table.insert(layout,{type = "texture",texture = icon,x = 3,y = 6})
+    table.insert(layout,{type = "key",x = 3,y = 6,key_num = 1})
 
     --bowser 2
     table.insert(layout,{type = "star",course = COURSE_BITDW,star_num = 0,x = 2,y = 7})
-    icon = "key_uncollected"
-    if save_file_get_flags() & (SAVE_FLAG_HAVE_KEY_2 | SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR) ~= 0 then
-        icon = "key_collected"
-    end
-    table.insert(layout,{type = "texture",texture = icon,x = 3,y = 7})
+    table.insert(layout,{type = "key",x = 3,y = 7,key_num = 2})
 
     --bowser 3
     for s = 0,3 do
@@ -85,31 +77,19 @@ local function sr1_5_layout_page_2()
     for s = 0,2 do
         table.insert(layout,{type = "star",course = COURSE_TOTWC,star_num = s,x = s + 6,y = 4})
     end
-    icon = "red_switch_unpressed"
-    if save_file_get_flags() & SAVE_FLAG_HAVE_WING_CAP ~= 0 then
-        icon = "red_switch_pressed"
-    end
-    table.insert(layout,{type = "texture",texture = icon,x = 5,y = 4})
+    table.insert(layout,{type = "cap_switch",x = 5,y = 4,switch_color = "red"})
 
     --metal cap
     for s = 0,2 do
         table.insert(layout,{type = "star",course = COURSE_COTMC,star_num = s,x = s + 6,y = 2})
     end
-    icon = "green_switch_unpressed"
-    if save_file_get_flags() & SAVE_FLAG_HAVE_METAL_CAP ~= 0 then
-        icon = "green_switch_pressed"
-    end
-    table.insert(layout,{type = "texture",texture = icon,x = 5,y = 2})
+    table.insert(layout,{type = "cap_switch",x = 5,y = 2,switch_color = "green"})
 
     --vanish cap
     for s = 0,2 do
         table.insert(layout,{type = "star",course = COURSE_VCUTM,star_num = s,x = s + 6,y = 6})
     end
-    icon = "blue_switch_unpressed"
-    if save_file_get_flags() & SAVE_FLAG_HAVE_VANISH_CAP ~= 0 then
-        icon = "blue_switch_pressed"
-    end
-    table.insert(layout,{type = "texture",texture = icon,x = 5,y = 6})
+    table.insert(layout,{type = "cap_switch",x = 5,y = 6,switch_color = "blue"})
 
     --pp
     table.insert(layout,{type = "star",course = COURSE_CAKE_END,star_num = 0,x = 4,y = 15})

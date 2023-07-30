@@ -60,36 +60,13 @@ local function template_layout_page_2()
     table.insert(layout,{type = "star",course = COURSE_WMOTR,star_num = 0,x = 0,y = 13})
     table.insert(layout,{type = "star",course = COURSE_SA,star_num = 0,x = 0,y = 15})
 
-    icon = "key_uncollected"
-    if save_file_get_flags() & (SAVE_FLAG_HAVE_KEY_1 | SAVE_FLAG_UNLOCKED_BASEMENT_DOOR) ~= 0 then
-        icon = "key_collected"
-    end
-    table.insert(layout,{type = "texture",texture = icon,x = 3,y = 2})
+    table.insert(layout,{type = "key",key_num = 1,x=3,y=2})
+    table.insert(layout,{type = "key",key_num = 2,x=6,y=2,right_align=true})
 
-    icon = "key_uncollected"
-    if save_file_get_flags() & (SAVE_FLAG_HAVE_KEY_2 | SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR) ~= 0 then
-        icon = "key_collected"
-    end
-    table.insert(layout,{type = "texture",texture = icon,x = 6,y = 2,right_align=true})
-
-    icon = "red_switch_unpressed"
-    if save_file_get_flags() & SAVE_FLAG_HAVE_WING_CAP ~= 0 then
-        icon = "red_switch_pressed"
-    end
-    table.insert(layout,{type = "texture",texture = icon,x = 3,y = 5})
-
-    icon = "green_switch_unpressed"
-    if save_file_get_flags() & SAVE_FLAG_HAVE_METAL_CAP ~= 0 then
-        icon = "green_switch_pressed"
-    end
-    table.insert(layout,{type = "texture",texture = icon,x = 3,y = 6})
-
-    icon = "blue_switch_unpressed"
-    if save_file_get_flags() & SAVE_FLAG_HAVE_VANISH_CAP ~= 0 then
-        icon = "blue_switch_pressed"
-    end
-    table.insert(layout,{type = "texture",texture = icon,x = 3,y = 7})
-
+    table.insert(layout,{type = "cap_switch",switch_color = "red",x = 3,y = 5})
+    table.insert(layout,{type = "cap_switch",switch_color = "green",x = 3,y = 6})
+    table.insert(layout,{type = "cap_switch",switch_color = "blue",x = 3,y = 7})
+    
     return layout
 end
 local pages = {template_layout_page_1,template_layout_page_2}
