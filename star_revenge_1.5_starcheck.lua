@@ -101,6 +101,7 @@ local function sr1_5_layout_page_2()
     for s = 0,4 do
         table.insert(layout,{type = "star",course = COURSE_RR,star_num = s,x = s + 3,y = 9})
     end
+    table.insert(layout,{type = "star",course = COURSE_RR,star_num = 6,x = 8,y = 9})
 
     --1-1
     table.insert(layout,{type = "star",course = COURSE_TTC,star_num = 0,x = 6,y = 13})
