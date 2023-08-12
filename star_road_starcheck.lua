@@ -11,11 +11,10 @@ end
 
 local function star_road_layout_page_1()
     layout = {}
-    for i = COURSE_BOB,COURSE_RR do
-        table.insert(layout,{type = "font",font = FONT_MENU})
+    table.insert(layout,{type = "font",font = FONT_HUD})
+    for i = COURSE_BOB,COURSE_RR do 
         table.insert(layout,{type = "text",text = format_number(i),x = 0, y = i})
-        for s = 0,6 do
-            table.insert(layout,{type = "font",font = FONT_HUD})
+        for s = 0,6 do 
             table.insert(layout,{type = "star",course = i,star_num = s,x = s+2,y = i})
         end
     end
@@ -23,11 +22,10 @@ local function star_road_layout_page_1()
 end
 
 local function star_road_layout_page_2()
-    
     layout = {}
+    table.insert(layout,{type = "font",font = FONT_MENU})
     for i = COURSE_BITDW,COURSE_BITS do
         local y = 2
-        table.insert(layout,{type = "font",font = FONT_MENU})
         if i < COURSE_BITS then
             xUsed = 1
             if (save_file_get_total_star_count(get_current_save_file_num() - 1,0,26)) >= 121 then
@@ -35,8 +33,7 @@ local function star_road_layout_page_2()
             end
             table.insert(layout,{type = "key",key_num = i-COURSE_BITDW+1,x=3*(i-COURSE_BITDW)+xUsed,y=3})
         end
-        table.insert(layout,{type = "text",text = "B" .. i-COURSE_BITDW+1,x =  3*(i-COURSE_BITDW),y = y})
-        table.insert(layout,{type = "font",font = FONT_HUD})
+        table.insert(layout,{type = "text",text = "B" .. i-COURSE_BITDW+1,x =  3*(i-COURSE_BITDW),y = y}) 
         table.insert(layout,{type = "star",course = i,star_num = 0,x =  3*(i-COURSE_BITDW),y = y + 1})
     end
     cap_text = {[COURSE_COTMC] = "MC",[COURSE_TOTWC] = "WC",[COURSE_VCUTM] = "VC"}
@@ -49,10 +46,8 @@ local function star_road_layout_page_2()
         if (save_file_get_total_star_count(get_current_save_file_num() - 1,0,26)) >= 121 then
             xUsed = 2
         end
-        table.insert(layout,{type = "cap_switch",switch_color = switch_names[i],x = x+xUsed,y = y+1})
-        table.insert(layout,{type = "font",font = FONT_MENU})
-        table.insert(layout,{type = "text",text = cap_text[i],x = x,y = y})
-        table.insert(layout,{type = "font",font = FONT_HUD})
+        table.insert(layout,{type = "cap_switch",switch_color = switch_names[i],x = x+xUsed,y = y+1}) 
+        table.insert(layout,{type = "text",text = cap_text[i],x = x,y = y}) 
         table.insert(layout,{type = "star",course = i,star_num = 0,x = x,y = y + 1})
     end
 
@@ -74,8 +69,7 @@ local function star_road_layout_page_2()
 
     y = 15
     table.insert(layout,{type = "star",course = COURSE_CAKE_END,star_num = 1,x = 0,y = y})
-
-    table.insert(layout,{type = "font",font = FONT_MENU})
+ 
 
     table.insert(layout,{type = "text",text = "Bowser Courses",x = 0, y = 1})
     table.insert(layout,{type = "text",text = "Cap Switches",x = 0, y = 4})
@@ -88,8 +82,7 @@ local function star_road_layout_page_2()
 
 
     if (save_file_get_total_star_count(get_current_save_file_num() - 1,0,26)) >= 120 then
-        table.insert(layout,{type = "text",text = "H Palace",x =  4, y = 14})
-        table.insert(layout,{type = "font",font = FONT_HUD})
+        table.insert(layout,{type = "text",text = "H Palace",x =  4, y = 14}) 
         table.insert(layout,{type = "star",course = COURSE_WMOTR,star_num = 0,x =  6,y = 15})
     end
     if (save_file_get_total_star_count(get_current_save_file_num() - 1,0,26)) >= 121 then
