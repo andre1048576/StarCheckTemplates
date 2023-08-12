@@ -164,8 +164,10 @@ local function generate_sm74_layout(pageNum)
     end
 end
 
----@diagnostic disable-next-line: undefined-global
-if star_check_layouts ~= nil then
+hook_event(HOOK_ON_PLAYER_CONNECTED,function ()
     ---@diagnostic disable-next-line: undefined-global
-    star_check_layouts[mod_name] = {pages = generate_sm74_layout,page_count = #pages}
-end
+    if star_check_layouts and mod_name ~= "template" then
+        ---@diagnostic disable-next-line: undefined-global
+        star_check_layouts[mod_name] = {pages = generate_sm74_layout,page_count = #pages}
+    end
+end)

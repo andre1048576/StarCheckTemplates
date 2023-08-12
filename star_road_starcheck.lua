@@ -112,8 +112,10 @@ local function generate_star_road_layout(pageNum)
     return pages[pageNum]()
 end
 
----@diagnostic disable-next-line: undefined-global
-if star_check_layouts ~= nil then
-     ---@diagnostic disable-next-line: undefined-global
-    star_check_layouts[mod_name] = {pages = generate_star_road_layout,page_count = #pages}
-end
+hook_event(HOOK_ON_PLAYER_CONNECTED,function ()
+    ---@diagnostic disable-next-line: undefined-global
+    if star_check_layouts and mod_name ~= "template" then
+        ---@diagnostic disable-next-line: undefined-global
+        star_check_layouts[mod_name] = {pages = generate_star_road_layout,page_count = #pages}
+    end
+end)
