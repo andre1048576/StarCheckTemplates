@@ -10,8 +10,7 @@ local function format_number(number)
 end
 
 local function star_road_layout_page_1()
-    layout = {}
-    table.insert(layout,{type = "font",font = FONT_HUD})
+    local layout = {}
     for i = COURSE_BOB,COURSE_RR do 
         table.insert(layout,{type = "text",text = format_number(i),x = 0, y = i})
         for s = 0,6 do 
@@ -22,8 +21,7 @@ local function star_road_layout_page_1()
 end
 
 local function star_road_layout_page_2()
-    layout = {}
-    table.insert(layout,{type = "font",font = FONT_MENU})
+    local layout = {}
     for i = COURSE_BITDW,COURSE_BITS do
         local y = 2
         if i < COURSE_BITS then
@@ -36,17 +34,16 @@ local function star_road_layout_page_2()
         table.insert(layout,{type = "text",text = "B" .. i-COURSE_BITDW+1,x =  3*(i-COURSE_BITDW),y = y}) 
         table.insert(layout,{type = "star",course = i,star_num = 0,x =  3*(i-COURSE_BITDW),y = y + 1})
     end
-    cap_text = {[COURSE_COTMC] = "MC",[COURSE_TOTWC] = "WC",[COURSE_VCUTM] = "VC"}
-    cap_colors = {[COURSE_COTMC] = {r = 0, b = 0},[COURSE_TOTWC] = {g = 0, b = 0},[COURSE_VCUTM] = {r = 0, g = 0}}
-    switch_names = {[COURSE_COTMC] = "green",[COURSE_TOTWC] = "red",[COURSE_VCUTM] = "blue"}
+    local cap_text = {[COURSE_COTMC] = "MC",[COURSE_TOTWC] = "WC",[COURSE_VCUTM] = "VC"}
+    local switch_names = {[COURSE_COTMC] = "green",[COURSE_TOTWC] = "red",[COURSE_VCUTM] = "blue"}
     for i = COURSE_COTMC, COURSE_VCUTM do
         local y = 5
         local x =  3*(i-COURSE_COTMC)
-        xUsed = 1
+        local xUsed = 1
         if (save_file_get_total_star_count(get_current_save_file_num() - 1,0,26)) >= 121 then
             xUsed = 2
         end
-        table.insert(layout,{type = "cap_switch",switch_color = switch_names[i],x = x+xUsed,y = y+1}) 
+        table.insert(layout,{type = "cap_switch",switch_color = switch_names[i],x = x+xUsed,y = y+1})
         table.insert(layout,{type = "text",text = cap_text[i],x = x,y = y}) 
         table.insert(layout,{type = "star",course = i,star_num = 0,x = x,y = y + 1})
     end
@@ -55,7 +52,7 @@ local function star_road_layout_page_2()
     table.insert(layout,{type = "star",course = COURSE_SA,star_num = 1,x =  1,y = 9})
 
     --PSS
-    y = 11
+    local y = 11
     table.insert(layout,{type = "star",course = COURSE_PSS,star_num = 0,x = 0,y = y})
     table.insert(layout,{type = "star",course = COURSE_PSS,star_num = 1,x =  1,y = y})
 

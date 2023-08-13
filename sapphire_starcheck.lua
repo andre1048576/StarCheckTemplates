@@ -6,7 +6,7 @@ local course_names = {{"Maple","Meadow"},{"Polar","Peaks"},{"Lush","Lagoon"},{"T
 --- "supersonic slide" "maple meadow" "polar peaks" "lush lagoon" "torchlight temple"
 
 local function sapphire_layout_page_1()
-    layout = {}
+    local layout = {}
     local currY = 1
     for i = 1,5 do
         table.insert(layout,{type = "text",text = course_names[i][1],x = 4.5, y = currY,center = true})

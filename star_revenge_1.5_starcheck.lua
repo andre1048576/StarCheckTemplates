@@ -10,21 +10,16 @@ local function format_number(number)
 end
 
 local function sr1_5_layout_page_1()
-    layout = {}
+    local layout = {}
     for i = COURSE_BOB,COURSE_TTM do
         local y =  i
-        table.insert(layout,{type = "font",font = FONT_MENU})
         table.insert(layout,{type = "text",text = format_number(i),x = 0, y = y})
-        table.insert(layout,{type = "font",font = FONT_HUD})
         for s = 0,6 do
             local x = (s+2)
             table.insert(layout,{type = "star",course = i,star_num = s,x = x,y = y})
         end
     end
-
-    table.insert(layout,{type = "font",font = FONT_MENU})
     table.insert(layout,{type = "text",text = "DBV",x = 0, y = 14})
-    table.insert(layout,{type = "font",font = FONT_HUD})
     for s = 0,6 do
         table.insert(layout,{type = "star",course = COURSE_THI,star_num = s,x = s,y = 15})
     end
@@ -34,7 +29,6 @@ end
 
 local function sr1_5_layout_page_2()
     local layout = {}
-    table.insert(layout,{type = "font",font = FONT_MENU})
     table.insert(layout,{type = "text",text = "OW1",x = 0, y = 1})
     table.insert(layout,{type = "text",text = "OW2",x = 0, y = 3})
     table.insert(layout,{type = "text",text = "MC",x = 9, y = 1,right_align = true})
@@ -49,8 +43,6 @@ local function sr1_5_layout_page_2()
     table.insert(layout,{type = "text",text = "1-1",x = 9, y = 13,right_align = true})
     table.insert(layout,{type = "text",text = "PP",x = 9, y = 15,right_align = true})
     table.insert(layout,{type = "text",text = "TOTSS",x = 0, y = 15})
-
-    table.insert(layout,{type = "font",font = FONT_HUD})
 
     --frozen slide
     for s = 0,3 do

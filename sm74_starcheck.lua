@@ -9,12 +9,10 @@ local function format_number(number)
 end
 
 local function sm74_layout_page_1()
-    layout = {}
+    local layout = {}
     for i = COURSE_BOB,COURSE_RR do
         local y =  i
-        table.insert(layout,{type = "font",font = FONT_MENU})
         table.insert(layout,{type = "text",text = format_number(i),x = 0, y = y})
-        table.insert(layout,{type = "font",font = FONT_HUD})
         for s = 0,6 do
             local x = (s+2)
             table.insert(layout,{type = "star",course = i,star_num = s,x = x,y = y})
@@ -26,7 +24,6 @@ end
 
 local function sm74_layout_page_2()
     local layout = {}
-    table.insert(layout,{type = "font",font = FONT_MENU})
     table.insert(layout,{type = "text",text = "OW1",x = 0, y = 1})
     table.insert(layout,{type = "text",text = "OW2",x = 0, y = 2})
     table.insert(layout,{type = "text",text = "OW3",x = 0, y = 3})
@@ -39,8 +36,6 @@ local function sm74_layout_page_2()
     table.insert(layout,{type = "text",text = "Frozen Slide",x = 0, y = 12})
     table.insert(layout,{type = "text",text = "Champ C.",x = 0, y = 14})
     table.insert(layout,{type = "text",text = "151st",x = 9, y = 14,right_align = true})
-
-    table.insert(layout,{type = "font",font = FONT_HUD})
     --OW1
     table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 0,x = 3,y = 1})
     table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 1,x = 4,y = 1})
@@ -56,11 +51,10 @@ local function sm74_layout_page_2()
     table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 2,x = 3,y = 3})
     
     --CAPS
-    cap_colors = {[COURSE_COTMC] = "green",[COURSE_TOTWC] = "red",[COURSE_VCUTM] = "blue"}
-    cap_stars = {[COURSE_COTMC] = 4,[COURSE_TOTWC] = 2,[COURSE_VCUTM] = 5}
+    local cap_colors = {[COURSE_COTMC] = "green",[COURSE_TOTWC] = "red",[COURSE_VCUTM] = "blue"}
+    local cap_stars = {[COURSE_COTMC] = 4,[COURSE_TOTWC] = 2,[COURSE_VCUTM] = 5}
     for i = COURSE_COTMC,COURSE_VCUTM do
         local y = i-15
-        table.insert(layout,{type = "font",font = FONT_HUD})
         for s = 0,cap_stars[i] do
             table.insert(layout,{type = "star",course = i,star_num = s,x = s+2,y = y})
         end
@@ -89,7 +83,6 @@ end
 
 local function sm74EE_layout_page_2()
     local layout = {}
-    table.insert(layout,{type = "font",font = FONT_MENU})
     table.insert(layout,{type = "text",text = "OW1",x = 0, y = 1})
     table.insert(layout,{type = "text",text = "OW2",x = 0, y = 2})
     table.insert(layout,{type = "text",text = "OW3",x = 0, y = 3})
@@ -101,8 +94,6 @@ local function sm74EE_layout_page_2()
     table.insert(layout,{type = "text",text = "B3",x = 0, y = 11})
     table.insert(layout,{type = "text",text = "Supply Slide",x = 0, y = 12})
     table.insert(layout,{type = "text",text = "Triarch Bridge",x = 0, y = 14})
-
-    table.insert(layout,{type = "font",font = FONT_HUD})
     --OW1
     table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 0,x = 3,y = 1})
     table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 3,x = 4,y = 1 })
@@ -118,11 +109,10 @@ local function sm74EE_layout_page_2()
     table.insert(layout,{type = "star",course = COURSE_NONE,star_num = 2,x = 4,y = 3 })
 
     --CAPS
-    cap_colors = {[COURSE_COTMC] = "green",[COURSE_TOTWC] = "red",[COURSE_VCUTM] = "blue"}
-    cap_stars = {[COURSE_COTMC] = 5,[COURSE_TOTWC] = 2,[COURSE_VCUTM] = 5}
+    local cap_colors = {[COURSE_COTMC] = "green",[COURSE_TOTWC] = "red",[COURSE_VCUTM] = "blue"}
+    local cap_stars = {[COURSE_COTMC] = 5,[COURSE_TOTWC] = 2,[COURSE_VCUTM] = 5}
     for i = COURSE_COTMC,COURSE_VCUTM do
         local y = i-15
-        table.insert(layout,{type = "font",font = FONT_HUD})
         for s = 0,cap_stars[i] do
             table.insert(layout,{type = "star",course = i,star_num = s,x = s+2,y = y})
         end

@@ -10,11 +10,9 @@ local function format_number(number)
 end
 
 local function template_layout_page_1()
-    layout = {}
+    local layout = {}
     for i = COURSE_BOB,COURSE_RR do
-        table.insert(layout,{type = "font",font = FONT_MENU})
         table.insert(layout,{type = "text",text = format_number(i),x = 0, y = i})
-        table.insert(layout,{type = "font",font = FONT_HUD})
         for s = 0,6 do
             table.insert(layout,{type = "star",course = i,star_num = s,x = s+2,y = i})
         end
@@ -23,7 +21,7 @@ local function template_layout_page_1()
 end
 
 local function template_layout_page_2()
-    layout = {}
+    local layout = {}
     return layout
 end
 local pages = {template_layout_page_1,template_layout_page_2}
