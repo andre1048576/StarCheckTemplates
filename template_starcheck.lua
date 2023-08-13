@@ -30,10 +30,12 @@ local function generate_template_layout(pageNum)
     return pages[pageNum]()
 end
 
-hook_event(HOOK_ON_PLAYER_CONNECTED,function ()
+local function on_connect()
     ---@diagnostic disable-next-line: undefined-global
     if star_check_layouts and mod_name ~= "template" then
         ---@diagnostic disable-next-line: undefined-global
         star_check_layouts[mod_name] = {pages = generate_template_layout,page_count = #pages}
     end
-end)
+end
+
+hook_event(HOOK_ON_PLAYER_CONNECTED,on_connect)
